@@ -31,4 +31,5 @@ Where the first item represents the ticket number and the second item represents
 - Supporting theaters of different sizes and shapes (each row can have a different number of seats).
 
 ## Improvements to be Implemented
-- Considering the increase of satisfaction level of seats towards the middle columns as well.
+- Considering the increase of satisfaction level of seats towards the middle columns as well. This can be optional as people may prefer sitting towards the sides of rows as well.
+- Adding ability to handle overflow by placing overflowed seats near each other, not based on the quality of the location of seats.
