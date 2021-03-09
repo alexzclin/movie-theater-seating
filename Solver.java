@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 class Solver {
-
     public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println("Please provide one input file and one output file!");
@@ -22,6 +21,7 @@ class Solver {
                 String[] info = curLine.split(" ");
                 String confirmation = movie.reserveSeats(Integer.parseInt(info[1]));
                 if (confirmation == null) {
+                    out.append(info[0] + " " + "FULL" + "\n");
                     System.out.println("Max capacity reached, cannot complete order " + info[0]);
                 } else {
                     out.append(info[0] + " " + confirmation + "\n");
