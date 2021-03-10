@@ -16,7 +16,8 @@ We will assign seats to customers based on the order in which tickets are purcha
 **Priorities:**
 1. Seats are grouped together in a single row.
 2. Seats are in a row that is towards the middle.
-3. If the theater is unable to provide seats that fit the group in one row, the group will be split apart. We will then start filling the rows with most capacity first, which will reduce the size of the group. Once the group can be fit into a single row, we will choose the row that is closest to the middle.
+3. Seats are assigned starting from the leftmost available space in the row to maximize the number of people that can be seated.
+4. If the theater is unable to provide seats that fit the group in one row, the group will be split apart. We will then start filling the rows with most capacity first, which will reduce the size of the group. Once the group can be fit into a single row, we will choose the row that is closest to the middle.
 
 
 

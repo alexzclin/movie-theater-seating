@@ -11,7 +11,6 @@ class Solver {
         }
 
         Theater movie = new Theater(10, 20);
-        //movie.printSeatSatisfaction();
 
         try (FileReader file = new FileReader(args[0])) {
             BufferedReader in = new BufferedReader(file);

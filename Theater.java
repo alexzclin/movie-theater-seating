@@ -3,9 +3,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 class Theater {
-    // note that we need disability seats
-    // have two options, best offer from customer standpoint and best offer from our standpoint
-
     private Status[][] seatAvailable; // available, reserved, or buffer
     private int numRows;
     private int totalSeats;
@@ -52,11 +49,19 @@ class Theater {
         // break ties for rows with most capacity by finding the one closest to the middle
         // will be able to rollback if we realize that we cannot fit the group
         if (row == -1) {
-            List<int[]> rollback = new LinkedList<>();
+            List<int[]> rollbackReserved = new LinkedList<>();
+            List<int[]> rollbackBuffered = new LinkedList<>();
             while (num > 0) {
                 if (totalSeats - reserved - buffer < num) {
-                    for (int[] locs: rollback) {
+                    for (int[] locs: rollbackReserved) {
                         seatAvailable[locs[0]][locs[1]] = Status.AVAILABLE;
+                        seatsLeftInRow[locs[0]]++;
+                        reserved--;
+                    }
+                    for (int[] locs: rollbackBuffered) {
+                        seatAvailable[locs[0]][locs[1]] = Status.AVAILABLE;
+                        seatsLeftInRow[locs[0]]++;
+                        buffer--;
                     }
                     return null;
                 }
@@ -85,7 +90,8 @@ class Theater {
                     }
                 }
                 for (int[] loc: seatLocs) {
-                    rollback.addAll(createBubble(loc[0], loc[1]));
+                    rollbackReserved.add(loc);
+                    rollbackBuffered.addAll(createBubble(loc[0], loc[1]));
                 }
             }
         } else {
@@ -120,7 +126,7 @@ class Theater {
                         seatAvailable[row + i][col + j] = Status.BUFFER;
                         buffer++;
                         seatsLeftInRow[row + i]--;
-                        buffered.add(new int[]{row + i, row + j});
+                        buffered.add(new int[]{row + i, col + j});
                     }
                 }
             }
